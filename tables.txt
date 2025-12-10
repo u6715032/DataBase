@@ -1,0 +1,52 @@
+--sql codes for postgresql database
+
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(20) NOT NULL CHECK (role IN ('admin', 'staff', 'user')),
+    member_id INT REFERENCES members(member_id) ON DELETE SET NULL -- Added FK constraint
+);
+
+CREATE TABLE members (
+    member_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    phone VARCHAR(20),
+    email VARCHAR(100) UNIQUE,
+    joined_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE books (
+    book_id SERIAL PRIMARY KEY,
+    isbn VARCHAR(20) UNIQUE, -- Good for scanning
+    title VARCHAR(255) NOT NULL,
+    author VARCHAR(255) NOT NULL,
+    publisher VARCHAR(100),
+    category VARCHAR(100),
+    publication_year INT
+);
+
+CREATE TABLE book_copies (
+    copy_id SERIAL PRIMARY KEY,
+    book_id INT REFERENCES books(book_id) ON DELETE CASCADE,
+    barcode VARCHAR(50) UNIQUE NOT NULL, -- The sticker on the book
+    status VARCHAR(20) DEFAULT 'available' CHECK (status IN ('available', 'borrowed', 'lost', 'damaged', 'reserved'))
+);
+
+CREATE TABLE loans (
+    loan_id SERIAL PRIMARY KEY,
+    copy_id INT REFERENCES book_copies(copy_id), -- Changed from book_id
+    member_id INT REFERENCES members(member_id),
+    borrow_date DATE DEFAULT CURRENT_DATE,
+    due_date DATE NOT NULL,
+    return_date DATE,
+    fine_amount NUMERIC(10, 2) DEFAULT 0.00
+);
+
+CREATE TABLE reservations (
+    reservation_id SERIAL PRIMARY KEY,
+    book_id INT REFERENCES books(book_id), -- Users reserve the Title, not a specific Copy
+    member_id INT REFERENCES members(member_id),
+    reserved_at TIMESTAMPTZ DEFAULT NOW(),
+    status VARCHAR(20) DEFAULT 'active' CHECK (status IN ('active', 'fulfilled', 'cancelled'))
+);
