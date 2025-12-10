@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Register • Library System</title>
+    <link rel="stylesheet" href="styles/demo1.css" />
+  </head>
+  <body>
+    <main class="container" aria-labelledby="pageTitle">
+      <header class="header">
+        <div class="logo">LS</div>
+        <div>
+          <h1 id="pageTitle">Create an Account</h1>
+          <p class="lead">
+            Self-register (Members) or ask Admin to create Staff accounts
+          </p>
+        </div>
+      </header>
+
+      <form
+        id="registerForm"
+        onsubmit="return handleRegister(event)"
+        novalidate
+      >
+        <div class="form-group">
+          <label for="fullname">Full name</label>
+          <input
+            id="fullname"
+            name="fullname"
+            type="text"
+            required
+            placeholder="Full name"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="regEmail">Email</label>
+          <input
+            id="regEmail"
+            name="email"
+            type="email"
+            required
+            placeholder="you@example.com"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone (optional)</label>
+          <input
+            id="phone"
+            name="phone"
+            type="text"
+            inputmode="tel"
+            placeholder="+95 9 1234 5678"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="memberType">Member type</label>
+          <select id="memberType" name="memberType" required>
+            <option selected disabled>-</option>
+            <option value="student">Student</option>
+            <option value="staff">Staff</option>
+            <option value="public">Public</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="regPassword">Password</label>
+          <input
+            id="regPassword"
+            name="password"
+            type="password"
+            required
+            placeholder="Choose a password"
+          />
+        </div>
+
+        <div class="form-group row" style="margin-top: 14px">
+          <button class="btn" type="submit">Create account</button>
+          <a class="btn ghost" href="login.html" role="button">Back to login</a>
+        </div>
+
+        <div id="rmsg" role="status" aria-live="polite" class="note"></div>
+
+        <div>
+          <input type="reset" />
+        </div>
+      </form>
+
+      <p class="footer">
+        Note: For Staff accounts, ask an Admin to create your account.
+      </p>
+    </main>
+
+    <script>
+      function handleRegister(e) {
+        e.preventDefault();
+        const name = document.getElementById("fullname").value.trim();
+        const email = document.getElementById("regEmail").value.trim();
+        const pass = document.getElementById("regPassword").value;
+        const type = document.getElementById("memberType").value;
+        const rmsg = document.getElementById("rmsg");
+        rmsg.textContent = "";
+
+        if (!name || !email || !pass) {
+          rmsg.textContent = "Please fill required fields.";
+          rmsg.className = "error";
+          return false;
+        }
+
+        // Basic password rule (example)
+        if (pass.length < 6) {
+          rmsg.textContent = "Password must be at least 6 characters.";
+          rmsg.className = "error";
+          return false;
+        }
+
+        rmsg.textContent = "Creating account…";
+        rmsg.className = "note";
+
+        setTimeout(() => {
+          // Replace with real API call to create user
+          rmsg.textContent = `Account created for ${name} (${type}) — you may now login (demo).`;
+          rmsg.className = "success";
+        }, 700);
+
+        return false;
+      }
+    </script>
+  </body>
+</html>

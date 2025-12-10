@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Forgot Password • Library System</title>
+    <link rel="stylesheet" href="styles/demo1.css" />
+  </head>
+  <body>
+    <main class="container" aria-labelledby="pageTitle">
+      <header class="header">
+        <div class="logo">LS</div>
+        <div>
+          <h1 id="pageTitle">Reset your password</h1>
+          <p class="lead">
+            Enter your registered email to receive a password reset link
+          </p>
+        </div>
+      </header>
+
+      <form id="forgotForm" onsubmit="return handleForgot(event)" novalidate>
+        <div class="form-group">
+          <label for="fEmail">Registered Email</label>
+          <input
+            id="fEmail"
+            name="email"
+            type="email"
+            required
+            placeholder="you@example.com"
+          />
+        </div>
+
+        <div class="form-group row" style="margin-top: 14px">
+          <button class="btn" type="submit">Send reset link</button>
+          <a class="btn ghost" href="login.html" role="button">Back to login</a>
+        </div>
+
+        <div id="fmsg" role="status" aria-live="polite" class="note"></div>
+      </form>
+
+      <p class="footer">
+        Reset link tokens should expire for security (implement in backend).
+      </p>
+    </main>
+
+    <script>
+      function handleForgot(e) {
+        e.preventDefault();
+        const email = document.getElementById("fEmail").value.trim();
+        const fmsg = document.getElementById("fmsg");
+        fmsg.textContent = "";
+
+        if (!email) {
+          fmsg.textContent = "Please enter your email.";
+          fmsg.className = "error";
+          return false;
+        }
+
+        fmsg.textContent = "Sending reset link…";
+        fmsg.className = "note";
+
+        setTimeout(() => {
+          // Replace with actual API call to trigger email/OTP
+          fmsg.textContent =
+            "If an account exists, a reset link was sent to your email (demo).";
+          fmsg.className = "success";
+        }, 700);
+
+        return false;
+      }
+    </script>
+  </body>
+</html>
