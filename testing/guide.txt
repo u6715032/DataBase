@@ -1,0 +1,26 @@
+--install php using brew OR manually(search it on google)
+brew install php
+
+--run/start servers in Postgres Application
+--created a new database called LibraryManagement in (pgAdmin 4) application
+
+--created a table called ("users") into LibraryManagement database and add some data to it.
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL, -- Must be long to store hashes!
+    role VARCHAR(20) NOT NULL CHECK (role IN ('admin', 'staff', 'user')),
+    member_id INT -- Optional: Link to your members table if the role is 'user'
+);
+INSERT INTO users (username, password, role) VALUES 
+('admin_guy', '12345678', 'admin'),
+('staff_lady', '12345678', 'staff'),
+('student_1',  '12345678', 'user');
+
+--way to run
+run "php -S localhost:8000" OR "php -S localhost:8000 -t testing" in terminal
+open "http://localhost:8000/loginPage.html" in web browser.
+--The command php -S localhost:8000 utilizes PHP's built-in development web server.
+
+
+HTTP ERROR 405 --> A 405 usually means the server refuses the HTTP method (POST) for that URL.

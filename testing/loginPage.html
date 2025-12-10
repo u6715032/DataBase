@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="/styles/loginPage.css" />
+    <script src="/scripts/loginPage.js"></script>
+  </head>
+  <body>
+    <form action="login.php" method="POST">
+      <div>
+        <label for="username">Username: </label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="-"
+          required
+        />
+      </div>
+      <br />
+      <div>
+        <label for="passcode">Password: </label>
+        <input
+          type="password"
+          id="passcode"
+          name="password"
+          placeholder="-"
+          maxlength="8"
+          required
+        />
+      </div>
+      <br />
+      <div>
+        <input type="checkbox" id="checkBox" required />
+        <label for="checkBox">I Agree To <b>Terms and Conditions</b>.</label>
+      </div>
+      <br />
+      <div>
+        <input type="reset" />
+      </div>
+      <br />
+      <div>
+        <input type="submit" value="Login" name="login_btn" />
+      </div>
+    </form>
+  </body>
+</html>
