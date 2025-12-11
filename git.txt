@@ -1,0 +1,10 @@
+--git ka data ko update lote chin yin
+git poll / git poll origin main
+
+--ko ka ta ku ku htel p update lote chin yin
+git add folder_name.type / git add .
+git commit -m "topic"
+git push
+
+--git mhr br twy update lote p ma lote p kyi chin yin
+git status
