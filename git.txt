@@ -2,7 +2,7 @@
 git pull / git pull origin main
 
 --ko ka ta ku ku htel p update lote chin yin
-git add folder_name.type / git add .
+git add file_name.type / git add .
 git commit -m "topic"
 git push
 
