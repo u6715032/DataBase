@@ -1,5 +1,5 @@
 --git ka data ko update lote chin yin
-git poll / git poll origin main
+git pull / git pull origin main
 
 --ko ka ta ku ku htel p update lote chin yin
 git add folder_name.type / git add .
